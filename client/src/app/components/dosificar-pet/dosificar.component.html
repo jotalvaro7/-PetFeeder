@@ -1,0 +1,50 @@
+<div class="col-lg-10">
+    <h1 class="h1-strong">
+        {{title}}
+    </h1>
+
+    <div class="alert alert-success" *ngIf="status == 'success'" role="alert">
+        <a [routerLink]="['/home']"><strong>Volver</strong></a>
+    </div>
+    <div *ngIf="pet.shots" >
+        <div>Esquema de alimentación actual:</div>
+        <hr>
+        <div>Cantidad de comida: {{pet.quantity}}</div>
+        <hr>
+        <div>Horarios: {{pet.hComida1}} - {{pet.hComida2}} - {{pet.hComida3}} - {{pet.hComida4}} - {{pet.hComida5}} - {{pet.hComida6}} - {{pet.hComida7}} - {{pet.hComida8}}</div>
+    </div>
+    <hr>
+    <form #paramsForm="ngForm" (ngSubmit)="onSubmit()" class="col-lg-2" >
+        <p>
+            <label>Cantidad de comida (gr):</label>
+            <input type="text" placeholder="Cuantos gr come su mascota" name="quantity" #quantity="ngModel"
+                [(ngModel)]="pet.quantity" class="form-control" required />
+            <span *ngIf="!quantity.valid && quantity.touched">
+                La cantidad que come su mascota es obligatoria!!
+            </span>
+        </p>
+
+        
+        <div>
+            <label>Raciones:</label>
+            
+            <select (change)="onChange($event)" [(ngModel)]="pet.shots"  name="shots" class="form-control" required>
+                
+                <option *ngFor="let r of raciones" [(value)]="r.id">{{r.name}}</option>
+            
+            </select>
+        </div>
+    
+        <div *ngFor="let number of numbers; let i = index" [attr.data-index]="i">
+            <label>Hora :
+                <input value = "{{pet.hComida1}}" [ngxTimepicker]="picker" [format]="24"  placeholder="Hora" name="hComida{{i+1}}" [(ngModel)]="number.value" class="form-control" required>
+                <ngx-material-timepicker #picker> </ngx-material-timepicker>
+            </label>
+        </div>
+        
+        <button type="submit" class="btn success" [disabled]="!paramsForm.form.valid">Guardar</button>
+        
+        
+    </form>
+    
+</div>

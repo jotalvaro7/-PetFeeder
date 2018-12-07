@@ -1,0 +1,28 @@
+.texto{
+    font-size: 200%;
+    margin-left: 5%
+}
+
+.Mascotas{
+    font-weight: normal;
+    margin-left: 3%;
+    margin-top: 0px;
+    margin-right: 5%;
+}
+
+.datos{
+    margin-top: 30px
+}
+
+/* Imagen que se muestra junto al nombre del nav */
+.Mascotas .avatar .responsive{
+    width: 100px;
+    height: auto;
+    border-radius:100px;
+    margin-top: 5px;
+    margin-right: 5px;
+}
+
+.Mascotas .item_pet{
+    font-weight: normal;
+}

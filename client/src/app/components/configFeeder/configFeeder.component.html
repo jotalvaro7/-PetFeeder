@@ -1,0 +1,22 @@
+<div class="col-lg-10">
+    <h1 class="h1-strong">
+        {{title}}
+    </h1>
+
+    <div class="alert alert-success" *ngIf="status == 'success'" role="alert">
+        <a [routerLink]="['/home']"><strong>Volver</strong></a>
+    </div>
+
+    <form #paramsForm="ngForm" (ngSubmit)="onSubmit()" class="col-lg-2">
+            <p>
+                <label>Configure la Mac del dispositivo:</label>
+                <input type="text" placeholder="Mac" name="mac" #mac="ngModel" [(ngModel)]="pet.mac" 
+                    class="form-control" required />
+                <span *ngIf="!mac.valid && mac.touched">
+                    La mac es obligatoria para configurar su dispositivo!!
+                </span>
+            </p>
+
+            <button type="submit" class="btn success" [disabled]="!paramsForm.form.valid">configurar</button>
+    </form>
+</div>

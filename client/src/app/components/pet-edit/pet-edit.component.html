@@ -1,0 +1,76 @@
+<div class="col-lg-5">
+    <h1 class="h1-strong">
+        {{title}}
+    </h1>
+
+    <div class="alert alert-success" *ngIf="status == 'success'" role="alert">
+            <a [routerLink]="['/home']"><strong>Volver</strong></a>
+    </div>
+
+    <form #petEditForm="ngForm" (ngSubmit)="onSubmit()" class="col-lg-12">
+        <p>
+            <label>Nombre</label>
+            <input type="text" name="name_pet" #name_pet="ngModel" [(ngModel)]="pet.name_pet" required class="form-control" />
+            <span *ngIf="!name_pet.value && name_pet.touched">
+                El nombre de la mascota es obligatorio
+            </span>
+        </p>
+
+        <p>
+            <label>Peso (Kg)</label>
+            <input type="text" name="weight" #weight="ngModel" [(ngModel)]="pet.weight" required class="form-control" />
+            <span *ngIf="!weight.value && weight.touched">
+                El peso es obligatorio
+            </span>
+        </p>
+        
+        <p>
+                <label for>Fecha de nacimiento</label>
+                <input 
+                    type="text"
+                    bsDatepicker
+                    [bsConfig]="bsConfig"
+                    placement= "right" 
+                    placeholder="Fecha de nacimiento" 
+                    name="born" 
+                    #born="ngModel" 
+                    [(ngModel)]="pet.born"  
+                    class="form-control" 
+                    required />
+                <span *ngIf="!born.valid && born.touched">
+                    La fecha de nacimiento es obligatoria!!
+                </span>
+            </p>
+        
+        <p>
+            <label>Raza</label>
+            <input type="text" name="raza" #raza="ngModel" [(ngModel)]="pet.raza" required class="form-control" />
+            <span *ngIf="!raza.value && raza.touched">
+                La raza es obligatoria!
+            </span>
+        </p>
+
+        <p>
+            <label for="sex">Sexo</label>
+            <select [(ngModel)]="pet.sex" name="sex" class="form-control" required>
+                <option value="Macho">Macho</option>
+                <option value="Hembra">Hembra</option>
+            </select>
+        </p>
+
+        <!--MOSTRAR AVATAR AL USUARIO CON UN TAMAÑO RESPONSIVE-->
+        <div *ngIf="pet.image_pet">
+            <img src="{{url + '/get-image-pet/'+pet.image_pet}}" class="responsive_archivo" />
+        </div>
+    
+        <p>
+            <label>Sube tu avatar</label>
+            <input type="file" placeholder="subir imagen" (change)="fileChangeEvent($event)" />
+        </p>
+
+        <div class="clearfix">
+            <button type="submit" class="btn warning" [disabled]="!petEditForm.form.valid">{{title}}</button>
+        </div>
+    
+    </form>
+</div>

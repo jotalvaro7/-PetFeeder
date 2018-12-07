@@ -1,0 +1,71 @@
+<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+<link rel="stylesheet" href='../../../../node_modules/materialize-css/dist/css/materialize.min.css'>
+
+<!DOCTYPE <!DOCTYPE html>
+<html>
+
+<body>
+    <div class="Mascotas">
+        <a class="btn-floating btn-Medium waves-effect waves-light blue" [routerLink]="['/add-pet']"><i class="material-icons">pets</i></a>
+        Agregar Mascota
+        <table>
+            <thead>
+                <tr class="datos">
+                    <th style="width:10%"></th>
+                    <th style="width:8%">Nombre</th>
+                    <th style="width:8%">Edad</th>
+                    <th style="width:8%">Raza</th>
+                    <th style="width:8%">Sexo</th>
+                    <th style="width:8%">Peso (Kg)</th>
+                    <th style="width:8%">Cantidad(Kg/gr)</th>
+                    <th style="width:8%">Raciones</th>
+                    <th colspan="4" style="width:1%">Acción</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let pet of pets" class="item_pet">
+                    <td class="avatar" *ngIf="pet">
+                        <!--cargar imagen de mascota-->
+                        <img src="{{url + 'get-image-pet/'+ pet.image_pet}}" *ngIf ="pet.image_pet" class="responsive" />
+                        <img src="assets/defult-dog.png" *ngIf="!pet.image_pet" class=responsive/>
+                    </td>
+                    <td>{{pet.name_pet}}</td>
+                    <td>{{edad(pet)}}</td>
+                    <td>{{pet.raza}}</td>
+                    <td>{{pet.sex}}</td>
+                    <td>{{pet.weight}}</td>
+                    <td>{{pet.quantity}}</td>
+                    <td>{{pet.shots}}</td>
+
+                    <td>
+                        <a class="btn-floating btn-Large waves-effect waves-light blue" [routerLink]="['/configFeeder/'+pet._id]">
+                            <i class="material-icons">settings</i></a>
+                    </td>
+                    
+                    <td>
+                        <a class="btn-floating btn-Medium waves-effect waves-light blue" [routerLink]="['/dosificar/'+pet._id]">
+                            <i class="material-icons">restaurant</i></a>
+                    </td>
+                    
+                    <td>
+                        <a class="btn-floating btn-Medium waves-effect waves-light blue" [routerLink]="['/edit-pet/'+pet._id]">
+                            <i class="material-icons">edit</i></a>
+                    </td>
+
+                    <td>
+                        <a class="btn-floating btn-Medium waves-effect waves-light blue" (click)="openModal(template)"> <i class="material-icons">delete</i></a>
+                        <ng-template #template>
+                            <div class="modal-body text-center">
+                                <p>Esta seguro que desea eliminar esta mascota?</p>
+                                <button type="button" style="margin-right:10px" class="btn btn-default" (click)=deletePet(pet._id)>Aceptar</button>
+                                <button type="button" class="btn btn-default" (click)=decline()>Cancelar</button>
+                            </div>
+                        </ng-template>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+
+</html>

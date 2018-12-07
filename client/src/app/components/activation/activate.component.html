@@ -1,0 +1,16 @@
+<div class="col-lg-5">
+    <h1 class="h1-strong">
+        Account Activation
+    </h1>
+
+    
+    <div class="alert alert-success" *ngIf="status == 'success'" role="alert">
+        <strong>Te has identificado correctamente, bienvenido!!</strong>
+    </div>
+
+    
+    <div class="alert alert-danger" *ngIf="status == 'error'" role="alert">
+        <strong>No te has podido identificar correctamente!!</strong>
+    </div>
+
+</div>

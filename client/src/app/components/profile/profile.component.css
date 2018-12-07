@@ -1,0 +1,27 @@
+#data-profile{
+    min-height: 40px;
+    text-align: left;
+}
+
+/**Imagen de perfil */
+#data-profile .responsive_image{
+    border-radius:100px;
+    width: 185px;
+    height: auto;
+    margin-top: 35%;
+}
+
+#data-profile .avatar{
+    width: 185px;
+    height: auto;
+}
+
+#info-profile{
+    margin-top: 70px;
+    font-size: 19px;
+    font-weight: normal;
+    color:#555;
+}
+
+
+

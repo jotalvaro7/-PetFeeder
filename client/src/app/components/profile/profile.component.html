@@ -1,0 +1,18 @@
+<div class="col-lg-8">
+    <h1 class="h1 strong">
+        {{title}}
+    </h1>
+    
+    <div id="data-profile" *ngIf="user">
+        <div class="avatar pull-left">
+            <img src="{{url + 'get-image-user/'+ user.image}}" *ngIf ="user.image" class="responsive_image" />
+            <img src="assets/default.png" *ngIf="!user.image" class="responsive_image" />
+        </div>
+    </div>
+
+    <div id="info-profile" *ngIf="user">
+        <p class="name">{{user.name+' '+user.surname}}</p>
+        <p class="email">{{user.email}}</p>
+    </div>
+  
+</div>

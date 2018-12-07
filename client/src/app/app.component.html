@@ -1,0 +1,77 @@
+<!--The content below is only a placeholder and can be replaced.-->
+<body>
+<div class="navigation col-lg-12">
+  <nav class="navbar navbar-light" style="background-color: #7e7e7e">
+    <!-- Navbar content -->
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <a [routerLink]="['/welcome']" class="navbar-brand">{{title}}</a>
+      </div>
+
+      <ul class="nav navbar-nav" *ngIf="identity">
+        <li>
+            <a [routerLink]="['/home']" [routerLinkActive]="['active']">
+            <span class="glyphicon glyphicon-home">
+              Mascota(s)
+            </span>
+          </a>
+        </li>
+      </ul>
+
+      <ul class="nav navbar navbar-nav navbar-right" *ngIf="!identity">
+        <li>
+          <a [routerLink]="['/login']" [routerLinkActive]="['active']">
+            <span class="glyphicon glyphicon-log-in"></span>
+              Login
+          </a>
+        </li>
+
+        <li>
+            <a [routerLink]="['/register']" [routerLinkActive]="['active']">
+              <span class="glyphicon glyphicon-user"></span>
+                Registro 
+            </a>
+          </li>
+      </ul>
+
+      <ul class = "nav navbar-nav navbar-right" *ngIf="identity">
+        <li class = "avatar">
+          <!--cargar imagen de usuario-->
+          <img src="../assets/default.png" *ngIf="!identity.image" class="responsive"/>
+          <img src="{{url + 'get-image-user/'+ identity.image}}" *ngIf ="identity && identity.image" class="responsive" />
+        </li>
+        <li class="dropdown">
+          <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+            {{identity.name}} <span class = "caret"></span>
+          </a>
+          <ul class="dropdown-menu">
+            <li>
+              <a [routerLink]="['/profile',identity._id]">
+                <span class="glyphicon glyphicon-user"></span>
+                Mi perfil
+              </a>
+            </li>
+            <li>
+              <a [routerLink]="['/my-data']">
+                  <span class="glyphicon glyphicon-cog"></span>
+                Editar perfil
+              </a>
+            </li>
+            <li>
+              <a class="pointer" (click)="logout()">
+                  <span class="glyphicon glyphicon-log-out"></span>
+                Cerrar sesión
+              </a>
+            </li>
+          </ul>
+        </li>
+      </ul>
+
+    </div>
+  </nav>
+</div>
+</body>
+<!--ETIQUETA MAGICA-->
+<router-outlet></router-outlet>
+
+

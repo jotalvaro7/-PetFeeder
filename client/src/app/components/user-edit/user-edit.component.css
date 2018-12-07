@@ -1,0 +1,12 @@
+
+/**Imagen de muestra al seleccionar el archivo con unas margenes que pueden ser apropiadas para la vista */
+.responsive_archivo{
+    width: 20.5%;
+    height: auto;
+}
+
+/**Estilo del boton actualizar mis datos */
+.warning {background-color: #ff9800;} /* Orange */
+.warning:hover {background: #e68a00;}
+
+

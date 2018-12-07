@@ -1,0 +1,85 @@
+/*GENERALES*/
+.h1-strong{
+    font-size: 35px;
+    font-weight: bold;
+    margin-left: 13px;
+    padding-bottom: 15px;
+    margin-bottom:  20px;
+    border-bottom: 1px solid #eee;
+}
+
+/*CABECERA*/
+
+/* AJusta la barra de navegacion al tamaño de la pagina */
+.navigation{
+    padding: 0px !important;  
+}
+
+/* ELIMINAR LOS BORDES DE LA BARRA DE NAVEGACION */
+.navigation .navbar {
+    border-radius: 0px !important;
+}
+
+.navigation .navbar *{
+    color:white !important;
+}
+
+.btn {
+    border: none; /* Remove borders */
+    color: white; /* Add a text color */
+    padding: 14px 28px; /* Add some padding */
+    cursor: pointer; /* Add a pointer cursor on mouse-over */
+}
+
+.active{
+    background: #474849 !important;
+}
+
+.pointer{
+    cursor: pointer;
+}
+
+.navigation .navbar a:hover{
+    background: #474849 !important;
+}
+
+.navigation .navbar .dropdown-menu *{
+    color:black !important;
+}
+
+
+.nav .open>a, .nav .open>a:focus, .nav .open>a:hover{
+    background: #474849 !important;
+}
+
+.navigation .navbar .dropdown-menu a:hover{
+    background: #eee !important;
+}
+
+/* Imagen que se muestra junto al nombre del nav */
+.navigation .avatar .responsive{
+    width: 38px;
+    height: auto;
+    border-radius:100px;
+    margin-top: 5px;
+    margin-right: 5px;
+}
+
+/*ESTILOS DE BOTONES  */
+.success {background-color: #4CAF50;} /* Green */
+.success:hover {background-color: #46a049;}
+
+.info {background-color: #2196F3;} /* Blue */
+.info:hover {background: #0b7dda;}
+
+.danger {background-color: #f44336;} /* Red */ 
+.danger:hover {background: #da190b;}
+
+.default {background-color: #e7e7e7; color: black;} /* Gray */ 
+.default:hover {background: #ddd;}
+
+
+
+
+
+

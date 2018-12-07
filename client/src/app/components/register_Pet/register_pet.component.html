@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+</head>
+
+<body>
+    <div class="col-lg-5">
+        <h1 class="h1-strong">
+            {{title}}
+        </h1>
+
+        
+        <div class="alert alert-success" *ngIf="status == 'success'" role="alert">
+            <a [routerLink]="['/home']">volver</a>
+        </div>
+        
+        <form #registerForm="ngForm" (ngSubmit)="onSubmit(registerForm)" class="col-lg-10">
+            <p> Por favor diligencie este formulario para agregar su mascota.</p>
+
+            <p>
+                <label>Nombre</label>
+                <input type="text" placeholder="Nombre" name="name_pet" #name_pet="ngModel" [(ngModel)]="pet.name_pet"
+                    class="form-control" required />
+                <span *ngIf="!name_pet.valid && name_pet.touched">
+                    El nombre de la mascota es obligatorio!!
+                </span>
+            </p>
+            <p>
+                <label>Peso (Kg)</label>
+                <input type="text" placeholder="Peso" name="weight" #weight="ngModel" [(ngModel)]="pet.weight" class="form-control"
+                    required />
+                <span *ngIf="!weight.valid && weight.touched">
+                    El peso es obligatorio!!
+                </span>
+            </p>
+
+            <p>
+                <label for>Fecha de nacimiento</label>
+                <input type="text" bsDatepicker placement="right" [bsConfig]="bsConfig" placeholder="Fecha de nacimiento"
+                    name="born" #born="ngModel" [(ngModel)]="pet.born" class="form-control" required />
+                <span *ngIf="!born.valid && born.touched">
+                    La fecha de nacimiento es obligatoria!!
+                </span>
+            </p>
+
+            <p>
+                <label>Raza</label>
+                <input type="text" placeholder="Raza" name="raza" #raza="ngModel" [(ngModel)]="pet.raza" class="form-control"
+                    required />
+                <span *ngIf="!raza.valid && raza.touched">La raza es obligatoria!! </span>
+            </p>
+
+            <p>
+                <label for="sex">Sexo</label>
+                <select [(ngModel)]="pet.sex" name="sex" class="form-control" required>
+                    <option value="Macho">Macho</option>
+                    <option value="Hembra">Hembra</option>
+                </select>
+            </p>
+            <button type="submit" class="btn success" [disabled]="!registerForm.form.valid">Registrar</button>
+
+        </form>
+    </div>
+</body>
+
+</html>
