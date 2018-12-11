@@ -54,13 +54,13 @@ export class HomeComponent implements OnInit{
        //*************
        */
       
-
     }
 
     ngOnInit(){
         console.log('home.component cargado!!')
         this.getPets();   
         //this.socket.emit('create notification','notification test');
+        Notification.requestPermission().then(() => new Notification('Hola mundo!'))
     }
         
     
