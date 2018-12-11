@@ -10,11 +10,6 @@ import {BsModalRef} from 'ngx-bootstrap/modal/bs-modal-ref.service';
 
 //socket prueba
 import {Socket} from 'ng-socket-io';
-//prueba webpush
-import {SwPush} from '@angular/service-worker';
-import { Subscription } from 'rxjs';
-
-const VAPID_PUBLIC = "BBdZpHaB4q21JZhCkuKRm7DDgVQQ_sgOTMMBSePjiqfg6PeWhLwcRcg3NtaP2fZvxSq4rm-kiqsRY3NjUtMc578";
 
 @Component({
     selector: 'home',
