@@ -6,11 +6,15 @@ import {PetService} from '../../services/pet.service'
 import { UserService } from '../../services/user.service';
 import { GLOBAL } from '../../services/global';
 import {BsModalService} from 'ngx-bootstrap/modal';
-import {BsModalRef} from 'ngx-bootstrap/modal/bs-modal-ref.service'
+import {BsModalRef} from 'ngx-bootstrap/modal/bs-modal-ref.service';
 
 //socket prueba
 import {Socket} from 'ng-socket-io';
+//prueba webpush
+import {SwPush} from '@angular/service-worker';
+import { Subscription } from 'rxjs';
 
+const VAPID_PUBLIC = "BBdZpHaB4q21JZhCkuKRm7DDgVQQ_sgOTMMBSePjiqfg6PeWhLwcRcg3NtaP2fZvxSq4rm-kiqsRY3NjUtMc578";
 
 @Component({
     selector: 'home',
@@ -38,9 +42,8 @@ export class HomeComponent implements OnInit{
        private modalService: BsModalService,
        //
        private socket: Socket,
+   
       
-       
-    
     ){
        this.title = "Hello, welcome to my app";
        this.url = GLOBAL.url;
@@ -48,12 +51,14 @@ export class HomeComponent implements OnInit{
        this.token = this._userService.getToken();
 
        //LISTEN SOCKET
+        /*
        socket.on('mensajeServidor', function(data){
            console.log(data)
            alert(data)
        })
        //*************
-    
+       */
+      
 
     }
 
@@ -61,8 +66,8 @@ export class HomeComponent implements OnInit{
         console.log('home.component cargado!!')
         this.getPets();   
         //this.socket.emit('create notification','notification test');
-        
     }
+        
     
     getPets(){
         this._petService.getPets(this.token).subscribe(

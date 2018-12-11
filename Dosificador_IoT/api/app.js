@@ -35,6 +35,7 @@ app.use(bodyParser.urlencoded({extended:false}));
 app.use(bodyParser.json()); //EN CADA UNA DE LA PETICIONES AL BACKEND
 
 
+
 //CORS - Archivo en bloc de notas para futuros usos
 app.use((req, res, next) => {
     res.header('Access-Control-Allow-Origin', '*');
