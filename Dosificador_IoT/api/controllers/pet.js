@@ -174,8 +174,7 @@ function getMyPets(req, res) {
                     //client.end() //*****finaliza la conexion con mqtt y termina la ejecucion
                 })
             }
-        })
-        
+        })        
     });
     
     
