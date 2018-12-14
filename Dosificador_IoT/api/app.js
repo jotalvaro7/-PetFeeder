@@ -4,28 +4,6 @@ var express = require('express');
 var bodyParser = require('body-parser');
 var app = express();
 
-
-//prueba
-/*
-var http = require('http');
-var server = http.createServer(app);
-var io = require('socket.io').listen(server);
-io.set("origins", "*:*");
-//server.listen(8000);
-
-/*
-io.on('connection', function(socket){
-    console.log('hay alguien aqui')
-    io.sockets.emit('mensajeServidor','Hola julio')
-    /* DESCOMENTAR SI SE QUIERE PONER A ESCUCHAR DESDE EL BACKEND LO QUE ENVIAN DESDE EL FRONT
-    socket.on('create notification', (data)=> {
-        console.log(data)
-    
-})
-*/
-
-
-
 //CARGAR RUTAS
 var user_routers = require('./routes/user');
 var pet_routers = require('./routes/pet');

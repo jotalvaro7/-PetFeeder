@@ -51,7 +51,6 @@ export class PetRegisterComponent implements OnInit{
         
     }
 
-
     ngOnInit(){
         console.log('componente de register_pet ha sido cargado...')
 

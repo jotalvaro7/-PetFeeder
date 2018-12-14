@@ -1,93 +1,87 @@
-import {Component, OnInit, TemplateRef, Injectable} from '@angular/core';
+import { Component, OnInit, TemplateRef, Injectable } from '@angular/core';
 import { ActivatedRoute, Router, Params } from '@angular/router';
-import {Pet} from '../../models/pet';
-import {ToastrService} from 'ngx-toastr';
-import {PetService} from '../../services/pet.service'
+import { Pet } from '../../models/pet';
+import { ToastrService } from 'ngx-toastr';
+import { PetService } from '../../services/pet.service'
 import { UserService } from '../../services/user.service';
 import { GLOBAL } from '../../services/global';
-import {BsModalService} from 'ngx-bootstrap/modal';
-import {BsModalRef} from 'ngx-bootstrap/modal/bs-modal-ref.service';
+import { BsModalService } from 'ngx-bootstrap/modal';
+import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
+
 
 //socket prueba
-import {Socket} from 'ng-socket-io';
+import { Socket } from 'ng-socket-io';
 
 @Component({
     selector: 'home',
-    templateUrl:'./home.component.html', //la vista
-    styleUrls:['./home.component.css'],
-    providers:[UserService, PetService]
+    templateUrl: './home.component.html', //la vista
+    styleUrls: ['./home.component.css'],
+    providers: [UserService, PetService]
 })
 
-export class HomeComponent implements OnInit{
+export class HomeComponent implements OnInit {
     public title: string;
     public url: string;
     public token;
     public identity;
     public status: string;
-    public pets : Pet[];
+    public pets: Pet[];
     public pet;
     modalRef: BsModalRef;
     
     constructor(
-       private toastr: ToastrService,
-       private _route:ActivatedRoute,
-       private _router: Router,
-       private _userService: UserService,
-       private _petService : PetService,
-       private modalService: BsModalService,
-       //
-       private socket: Socket,
-   
-      
-    ){
-       this.title = "Hello, welcome to my app";
-       this.url = GLOBAL.url;
-       this.identity = this._userService.getIdentity();
-       this.token = this._userService.getToken();
-
-       //LISTEN SOCKET
-        /*
-       socket.on('mensajeServidor', function(data){
-           console.log(data)
-           alert(data)
-       })
-       //*************
-       */
-      
-    }
-
-    ngOnInit(){
-        console.log('home.component cargado!!')
-        this.getPets();   
-        //this.socket.emit('create notification','notification test');
-        Notification.requestPermission().then(() => new Notification('Hola mundo!'))
-    }
+        private toastr: ToastrService,
+        private _route: ActivatedRoute,
+        private _router: Router,
+        private _userService: UserService,
+        private _petService: PetService,
+        private modalService: BsModalService,
+        //
+        private socket: Socket,
+    ) {
+        this.title = "Hello, welcome to my app";
+        this.url = GLOBAL.url;
+        this.identity = this._userService.getIdentity();
+        this.token = this._userService.getToken();
         
+        this.socket.on('mensajeServidor', function (data) {
+            new Notification(data)
+        })
+       
+    }
+
+    ngOnInit() {
+        console.log('home.component cargado!!')
+        this.getPets();
+        //Notification.requestPermission().then(() => new Notification('Notificaciones activadas!!')) 
     
-    getPets(){
+    }
+
+    getPets() {
         this._petService.getPets(this.token).subscribe(
             response => {
-                if(response.pets){
+                if (response.pets) {
                     this.pets = response.pets
-                }else{
+                } else {
                     this.status = 'error';
                 }
-                
+
             },
             error => {
                 console.log(<any>error);
             }
         )
     }
-   
 
-    refresh(event = null){
+
+    refresh(event = null) {
         this.getPets();
+        //this.consumeEvent();
     }
 
     //Modals/Popup
-    openModal(template: TemplateRef<any>){
-        this.modalRef = this.modalService.show(template, {class: 'modal-sm'});
+    openModal(template: TemplateRef<any>) {
+        this.modalRef = this.modalService.show(template, { class: 'modal-sm' });
     }
 
     deletePet(id) {
@@ -102,7 +96,7 @@ export class HomeComponent implements OnInit{
         );
     }
 
-    decline():void{
+    decline(): void {
         this.modalRef.hide();
     }
 
@@ -175,10 +169,10 @@ export class HomeComponent implements OnInit{
             daysDiff = FirstMonthDiff;
         }
 
-       
+
         let nuevaEdad = yearDiff + "Y " + monthDiff + "M " + daysDiff + "D"
-       
+
         return nuevaEdad;
     }
-    
+
 }

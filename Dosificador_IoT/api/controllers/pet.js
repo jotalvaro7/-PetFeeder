@@ -5,13 +5,11 @@ var fs = require('fs');
 var moment = require('moment');
 var mongoosePaginate = require('mongoose-pagination')
 
-//pruebas
-
 var express = require('express');
 var bodyParser = require('body-parser');
 var app = express();
 
-//prueba socket io
+//PRUEBA SOCKET.IO
 var http = require('http');
 var server = http.createServer(app);
 var io = require('socket.io').listen(server);
@@ -117,7 +115,6 @@ function dosificarPet(req, res) {
     var update = req.body;
     var mac=update.mac;
     
-
     Pet.findOne({ 'user': req.user.sub, '_id': petId }).exec((err, check) => {
         if (err) return res.status(500).send({ message: 'Error en la peticion' });
         if (check) {
@@ -151,41 +148,36 @@ function dosificarPet(req, res) {
     })
 }
 
-//DEVOLVER EL LISTADO DE LAS MASCOTAS QUE TIENE UN USUARIO
+//DEVOLVER EL LISTADO DE LAS MASCOTAS QUE TIENE UN USUARIO - CONEXION CON MQTT PARA RECIBIR LOS MENSAJES
+//DE RECONEXION DEL HARDWARE Y TRANSMITIR NOTIFICACIONES CON SOKET.IO DEL BACKEND AL FRONTEND
 function getMyPets(req, res) {
     var userId = req.user.sub;
     var find = Pet.find({ user: userId })
 
     var mac='12345678'
-    //MQTT broker.hivemq.com
     var mqtt = require('mqtt')
     var client = mqtt.connect('mqtt://35.207.54.102')
     client.on('connect', function () {
         client.subscribe(mac+'/RECONNECT',function(err){
             if(!err){
                 console.log('Mqtt conectado')
+                client.on('message', function (topic, message) {
+                    var alerta = message.toString();
+                    if(alerta != null){
+                        io.on('connection', function(socket){
+                            io.sockets.emit('La conexion se ha realizado');
+                        })     
+                    } 
+                    console.log("El dispositivo se reinicio:", alerta);
+                    io.sockets.emit('mensajeServidor','El dosificador se ha reiniciado:' + alerta);
+                    
+                    //client.end() //*****finaliza la conexion con mqtt y termina la ejecucion
+                })
             }
-            
         })
         
     });
-    client.on('message', function (topic, message) {
-        // message is Buffer
-        //console.log(message.toString());
-        var alerta = message.toString();
-        console.log("El dispositivo se reinicio:", alerta);
-        /*
-        if(alerta != null){
-            io.on('connection', function(socket){
-                console.log('desde mqtt reconect');
-                io.sockets.emit('mensajeServidor','El dosificador se ha reiniciado:' + alerta);
-            })
-            
-        } 
-        */
-        
-        //client.end() //*****finaliza la conexion con mqtt y termina la ejecucion
-    })
+    
     
     
 
